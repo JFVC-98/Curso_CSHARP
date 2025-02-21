@@ -18,18 +18,24 @@ internal class Program
             MethodInfo[] info = item.GetType().GetMethods();
             foreach (var method in info)
             {
-                if (method.ReturnType == typeof(void))
+                if (method.DeclaringType.Namespace != "System")
                 {
-                    Console.WriteLine(method.Name);
+                    Console.WriteLine("Tipo metodo: " + method.ReturnType.Name);
+                    Console.WriteLine("Nombre metodo: "+method.Name);
+                    foreach (var param in method.GetParameters())
+                    {
+                        Console.WriteLine("Parametro: "+param);
+                    }
                     //method.Invoke(item.Value, new object[] { 1 });
                     /*if (method.Name != "Imprimir")
                     {
                         //item.Value.GetType().GetMethod(method.Name).Invoke(item.Value, new object[] { 1 });
                         method.Invoke(item,new object[] { Convert.ToInt32(Console.ReadLine()) });
                     }*/
-                    Console.WriteLine(method.DeclaringType);
+                    Console.WriteLine("Clase: "+method.DeclaringType.Name);
+                    Console.WriteLine("\n");
 
-                }
+               }
             }
             /*if (Console.ReadLine()=="1")
             {
